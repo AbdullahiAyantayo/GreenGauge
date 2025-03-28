@@ -1,9 +1,21 @@
-import { scrapeYCCompanies, getUniqueSectors, getUniqueFundingStages } from '@/utils/scraper';
+import { getUniqueSectors, getUniqueFundingStages } from '@/utils/scraper';
 import CompanyList from '@/components/CompanyList';
 import ChatBot from '@/components/ChatBot';
 
+async function getCompanies() {
+  const res = await fetch('http://localhost:3004/api/companies', {
+    cache: 'no-store'
+  });
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch companies');
+  }
+  
+  return res.json();
+}
+
 export default async function Home() {
-  const companies = await scrapeYCCompanies();
+  const companies = await getCompanies();
   const sectors = getUniqueSectors(companies);
   const fundingStages = getUniqueFundingStages(companies);
 
