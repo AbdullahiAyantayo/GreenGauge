@@ -7,10 +7,7 @@ const nextConfig = {
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
   reactStrictMode: true,
-  swcMinify: true,
-  experimental: {
-    appDir: true,
-  }
+  swcMinify: true
 };
 
 export default nextConfig; 
