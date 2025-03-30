@@ -10,7 +10,8 @@ import {
   Title,
   Tooltip,
   Legend,
-  LineController
+  LineController,
+  ChartConfiguration
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { Company } from '../types';

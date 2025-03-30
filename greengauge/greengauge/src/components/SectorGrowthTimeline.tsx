@@ -9,7 +9,8 @@ import {
   Title,
   Tooltip,
   Legend,
-  BarController
+  BarController,
+  ChartConfiguration
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Company } from '../types';
