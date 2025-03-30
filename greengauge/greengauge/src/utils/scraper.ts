@@ -765,6 +765,6 @@ export function getUniqueFundingStages(companies: Company[]): string[] {
 }
 
 export async function getCompanies(): Promise<Company[]> {
-  // Return the real YC companies data instead of mock data
+  // Return mock data instead of fetching from API
   return YC_CLIMATE_COMPANIES;
 } 
