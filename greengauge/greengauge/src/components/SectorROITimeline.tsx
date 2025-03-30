@@ -82,7 +82,7 @@ export default function SectorROITimeline({ companies }: SectorROITimelineProps)
       };
     });
 
-    const config: ChartJS.ChartConfiguration = {
+    const config: ChartConfiguration = {
       type: 'line',
       data: {
         labels: years,
@@ -108,7 +108,7 @@ export default function SectorROITimeline({ companies }: SectorROITimelineProps)
           },
           tooltip: {
             callbacks: {
-              label: function(context) {
+              label: function(context: any) {
                 const value = context.parsed.y;
                 return `${context.dataset.label}: $${(value / 1000000).toFixed(1)}M`;
               }
@@ -126,7 +126,7 @@ export default function SectorROITimeline({ companies }: SectorROITimelineProps)
               }
             },
             ticks: {
-              callback: function(value) {
+              callback: function(value: any) {
                 return `$${(Number(value) / 1000000).toFixed(1)}M`;
               }
             }
