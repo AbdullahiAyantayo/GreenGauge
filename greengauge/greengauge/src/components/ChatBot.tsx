@@ -1,89 +1,49 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { Company } from '@/utils/scraper';
-
-interface ChatBotProps {
-  companies: Company[];
-}
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
+import { useState } from 'react';
+import { Company, Message, ChatBotProps } from '../types';
 
 export default function ChatBot({ companies }: ChatBotProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: 'Hello! I\'m your AI assistant for YC Climate Tech companies. I can help you learn about these companies, their sectors, funding stages, and more. What would you like to know?'
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-
-    // Process the question and generate a response
-    const response = await generateResponse(userMessage);
-    setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-  };
-
-  const generateResponse = async (question: string): Promise<string> => {
-    // Convert companies data to a format suitable for the AI
-    const companiesData = companies.map(company => ({
-      name: company.name,
-      description: company.description,
-      sector: company.sector,
-      funding: company.funding,
-      founded: company.founded,
-      teamSize: company.teamSize,
-      location: company.location,
-      keyMetrics: company.keyMetrics
-    }));
-
-    // Create a prompt that includes the companies data and the user's question
-    const prompt = `Based on the following YC Climate Tech companies data:
-    ${JSON.stringify(companiesData, null, 2)}
-    
-    Please answer this question: ${question}
-    
-    Provide a clear, concise answer based on the available data. If the information is not available in the data, please say so.`;
+    setIsLoading(true);
 
     try {
-      // Make API call to OpenAI
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({
+          prompt: userMessage,
+          companies: companies,
+        }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response from AI');
+        throw new Error('Failed to get response');
       }
 
       const data = await response.json();
-      return data.response;
+      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
     } catch (error) {
-      console.error('Error generating response:', error);
-      return 'I apologize, but I encountered an error while processing your question. Please try again.';
+      console.error('Error:', error);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: 'Sorry, I encountered an error. Please try again.' 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,12 +71,11 @@ export default function ChatBot({ companies }: ChatBotProps) {
         </button>
       ) : (
         <div className="bg-white rounded-lg shadow-xl w-96 h-[600px] flex flex-col">
-          {/* Header */}
-          <div className="bg-green-600 text-white p-4 rounded-t-lg flex justify-between items-center">
-            <h3 className="font-semibold">YC Climate Tech Assistant</h3>
+          <div className="p-4 border-b flex justify-between items-center">
+            <h3 className="font-semibold text-lg">Climate Tech Assistant</h3>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-gray-200"
+              className="text-gray-500 hover:text-gray-700"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +94,6 @@ export default function ChatBot({ companies }: ChatBotProps) {
             </button>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((message, index) => (
               <div
@@ -155,22 +113,33 @@ export default function ChatBot({ companies }: ChatBotProps) {
                 </div>
               </div>
             ))}
-            <div ref={messagesEndRef} />
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-gray-100 rounded-lg p-3 text-gray-800">
+                  <div className="flex space-x-2">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Input */}
           <form onSubmit={handleSubmit} className="p-4 border-t">
             <div className="flex space-x-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about YC Climate Tech companies..."
-                className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Ask about climate tech companies..."
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                disabled={isLoading}
               />
               <button
                 type="submit"
-                className="bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-700 transition-colors"
+                disabled={isLoading || !input.trim()}
+                className="bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Send
               </button>

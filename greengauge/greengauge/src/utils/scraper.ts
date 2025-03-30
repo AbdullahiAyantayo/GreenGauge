@@ -1,30 +1,13 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-
-export interface Company {
-  name: string;
-  description: string;
-  logo: string;
-  accelerator: string;
-  sector: string;
-  website?: string;
-  funding?: string;
-  founded?: number;
-  teamSize?: string;
-  location?: string;
-  keyMetrics?: {
-    carbonReduction?: string;
-    fundingAmount?: string;
-    customers?: string;
-  };
-}
+import { Company } from '../types';
 
 // Real YC Climate Tech Companies
 const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Helion Energy",
     description: "Commercial fusion energy company developing a fusion generator",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Helion+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Clean Energy",
     website: "https://www.helionenergy.com",
@@ -41,7 +24,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Sublime Systems",
     description: "Decarbonizing cement production through electrochemical manufacturing",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Sublime+Systems&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Materials",
     website: "https://sublime-systems.com",
@@ -57,7 +40,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Twelve",
     description: "Converting CO2 into valuable chemicals and materials",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Twelve&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Capture",
     website: "https://www.twelve.co",
@@ -74,7 +57,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Charm Industrial",
     description: "Converting biomass into bio-oil for carbon removal",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Charm+Industrial&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Removal",
     website: "https://charmindustrial.com",
@@ -90,7 +73,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Living Carbon",
     description: "Enhanced trees for carbon capture and biomass production",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Living+Carbon&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Capture",
     website: "https://www.livingcarbon.com",
@@ -106,7 +89,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Watershed",
     description: "Enterprise climate platform",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Watershed&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Climate Software",
     website: "https://watershed.com",
@@ -123,7 +106,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Crusoe Energy",
     description: "Digital flare mitigation and clean computing infrastructure",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Crusoe+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Clean Energy",
     website: "https://www.crusoeenergy.com",
@@ -139,7 +122,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Parallel Systems",
     description: "Autonomous electric rail vehicles",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Parallel+Systems&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Transportation",
     website: "https://moveparallel.com",
@@ -155,7 +138,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Moment Energy",
     description: "Second-life battery energy storage",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Moment+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Energy Storage",
     website: "https://momentenergy.ca",
@@ -171,7 +154,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Carbon Direct",
     description: "Carbon management solutions for businesses",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Carbon+Direct&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Management",
     website: "https://carbon-direct.com",
@@ -188,7 +171,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Form Energy",
     description: "Long-duration energy storage technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Form+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Energy Storage",
     website: "https://formenergy.com",
@@ -204,7 +187,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "ZeroAvia",
     description: "Hydrogen-electric aviation",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=ZeroAvia&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Transportation",
     website: "https://zeroavia.com",
@@ -220,7 +203,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Pachama",
     description: "AI-powered forest carbon credits",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Pachama&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Credits",
     website: "https://pachama.com",
@@ -236,7 +219,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Heirloom",
     description: "Direct air capture technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Heirloom&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Removal",
     website: "https://heirloomcarbon.com",
@@ -252,7 +235,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Mango Materials",
     description: "Biodegradable plastics from methane",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Mango+Materials&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Materials",
     website: "https://mangomaterials.com",
@@ -268,7 +251,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Brimstone Energy",
     description: "Zero-carbon cement production",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Brimstone+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Materials",
     website: "https://brimstone.com",
@@ -284,7 +267,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Momentus",
     description: "Space transportation and infrastructure",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Momentus&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Space",
     website: "https://momentus.space",
@@ -300,7 +283,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Carbon Engineering",
     description: "Direct air capture technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Carbon+Engineering&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Removal",
     website: "https://carbonengineering.com",
@@ -316,7 +299,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "EcoFlow",
     description: "Portable power stations",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=EcoFlow&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Energy Storage",
     website: "https://www.ecoflow.com",
@@ -332,7 +315,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Volta",
     description: "Electric vehicle charging network",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Volta&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Transportation",
     website: "https://www.voltacharging.com",
@@ -348,7 +331,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Commonwealth Fusion Systems",
     description: "Fusion energy technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Commonwealth+Fusion+Systems&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Clean Energy",
     website: "https://cfs.energy",
@@ -364,7 +347,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Sila Nanotechnologies",
     description: "Battery materials technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Sila+Nanotechnologies&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Energy Storage",
     website: "https://silanano.com",
@@ -380,7 +363,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Redwood Materials",
     description: "Battery recycling and materials",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Redwood+Materials&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Recycling",
     website: "https://redwoodmaterials.com",
@@ -396,7 +379,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "LanzaTech",
     description: "Carbon recycling technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=LanzaTech&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Capture",
     website: "https://www.lanzatech.com",
@@ -412,7 +395,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Carbon Clean",
     description: "Carbon capture technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Carbon+Clean&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Capture",
     website: "https://carbonclean.com",
@@ -428,7 +411,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "EcoVadis",
     description: "Sustainability ratings platform",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=EcoVadis&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Climate Software",
     website: "https://ecovadis.com",
@@ -444,7 +427,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "CarbonCure",
     description: "CO2 utilization in concrete",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=CarbonCure&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Materials",
     website: "https://www.carboncure.com",
@@ -460,7 +443,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "AMP Robotics",
     description: "AI-powered recycling technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=AMP+Robotics&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Recycling",
     website: "https://www.amprobotics.com",
@@ -476,7 +459,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "BlocPower",
     description: "Clean energy for buildings",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=BlocPower&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Clean Energy",
     website: "https://www.blocpower.io",
@@ -492,7 +475,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Nexus Power",
     description: "Sustainable battery technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Nexus+Power&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Energy Storage",
     website: "https://www.nexuspower.com",
@@ -508,7 +491,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Carbon Engineering",
     description: "Direct air capture technology",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Carbon+Engineering&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Removal",
     website: "https://carbonengineering.com",
@@ -524,7 +507,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Carbon Direct",
     description: "Carbon management solutions for businesses",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Carbon+Direct&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Management",
     website: "https://carbon-direct.com",
@@ -541,7 +524,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Living Carbon",
     description: "Enhanced trees for carbon capture and biomass production",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Living+Carbon&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Capture",
     website: "https://www.livingcarbon.com",
@@ -557,7 +540,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Watershed",
     description: "Enterprise climate platform",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Watershed&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Climate Software",
     website: "https://watershed.com",
@@ -574,7 +557,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Crusoe Energy",
     description: "Digital flare mitigation and clean computing infrastructure",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Crusoe+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Clean Energy",
     website: "https://www.crusoeenergy.com",
@@ -590,7 +573,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Parallel Systems",
     description: "Autonomous electric rail vehicles",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Parallel+Systems&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Transportation",
     website: "https://moveparallel.com",
@@ -606,7 +589,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Moment Energy",
     description: "Second-life battery energy storage",
-    logo: "/placeholder-logo.svg",
+    logo: "https://ui-avatars.com/api/?name=Moment+Energy&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Energy Storage",
     website: "https://momentenergy.ca",
@@ -619,7 +602,10 @@ const YC_CLIMATE_COMPANIES: Company[] = [
       fundingAmount: "$4.5M+"
     }
   }
-];
+].map(company => ({
+  ...company,
+  logo: `https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=0D9488&color=fff`
+}));
 
 // Known climate tech companies from Techstars
 const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
@@ -661,8 +647,103 @@ const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
   }
 ];
 
+// Mock data for climate tech companies
+const mockCompanies: Company[] = [
+  {
+    name: "CarbonCapture",
+    description: "Developing direct air capture technology to remove CO2 from the atmosphere",
+    logo: "https://bookface-images.s3.amazonaws.com/logos/company_1.png",
+    accelerator: "YC W23",
+    sector: "Carbon Removal",
+    website: "https://carboncapture.com",
+    funding: "Series A",
+    founded: 2020,
+    teamSize: "11-50",
+    location: "San Francisco, CA",
+    keyMetrics: {
+      carbonReduction: "100,000 tons CO2/year",
+      fundingAmount: "$12M",
+      customers: "5 major corporations"
+    }
+  },
+  {
+    name: "SolarGrid",
+    description: "AI-powered solar panel optimization and maintenance platform",
+    logo: "https://bookface-images.s3.amazonaws.com/logos/company_2.png",
+    accelerator: "YC S23",
+    sector: "Renewable Energy",
+    website: "https://solargrid.com",
+    funding: "Seed",
+    founded: 2021,
+    teamSize: "1-10",
+    location: "Austin, TX",
+    keyMetrics: {
+      carbonReduction: "50,000 tons CO2/year",
+      fundingAmount: "$2.5M",
+      customers: "15 solar farms"
+    }
+  },
+  {
+    name: "EcoTransport",
+    description: "Electric vehicle fleet management and charging infrastructure",
+    logo: "https://bookface-images.s3.amazonaws.com/logos/company_3.png",
+    accelerator: "YC W22",
+    sector: "Transportation",
+    website: "https://ecotransport.com",
+    funding: "Series B",
+    founded: 2019,
+    teamSize: "51-200",
+    location: "Los Angeles, CA",
+    keyMetrics: {
+      carbonReduction: "200,000 tons CO2/year",
+      fundingAmount: "$45M",
+      customers: "25 fleet operators"
+    }
+  },
+  {
+    name: "GreenBuild",
+    description: "Sustainable building materials and construction technology",
+    logo: "https://bookface-images.s3.amazonaws.com/logos/company_4.png",
+    accelerator: "YC S22",
+    sector: "Construction",
+    website: "https://greenbuild.com",
+    funding: "Series A",
+    founded: 2020,
+    teamSize: "11-50",
+    location: "Boston, MA",
+    keyMetrics: {
+      carbonReduction: "75,000 tons CO2/year",
+      fundingAmount: "$8M",
+      customers: "12 construction companies"
+    }
+  },
+  {
+    name: "AgriTech",
+    description: "AI-powered precision agriculture and sustainable farming",
+    logo: "https://bookface-images.s3.amazonaws.com/logos/company_5.png",
+    accelerator: "YC W23",
+    sector: "Agriculture",
+    website: "https://agritech.com",
+    funding: "Seed",
+    founded: 2022,
+    teamSize: "1-10",
+    location: "Chicago, IL",
+    keyMetrics: {
+      carbonReduction: "30,000 tons CO2/year",
+      fundingAmount: "$1.5M",
+      customers: "8 farms"
+    }
+  }
+];
+
 export async function scrapeYCCompanies(): Promise<Company[]> {
-  return YC_CLIMATE_COMPANIES;
+  try {
+    // For now, return the static data
+    return YC_CLIMATE_COMPANIES;
+  } catch (error) {
+    console.error('Error scraping YC companies:', error);
+    return []; // Return empty array on error
+  }
 }
 
 export async function scrapeTechstarsCompanies(): Promise<Company[]> {
@@ -675,10 +756,15 @@ export function filterClimateTechCompanies(companies: Company[]): Company[] {
 
 // Helper function to get unique sectors
 export function getUniqueSectors(companies: Company[]): string[] {
-  return [...new Set(companies.map(company => company.sector))].sort();
+  return [...new Set(companies.map(company => company.sector).filter((sector): sector is string => !!sector))];
 }
 
 // Helper function to get unique funding stages
 export function getUniqueFundingStages(companies: Company[]): string[] {
-  return [...new Set(companies.map(company => company.funding || 'Unknown'))].sort();
+  return [...new Set(companies.map(company => company.funding).filter((funding): funding is string => !!funding))];
+}
+
+export async function getCompanies(): Promise<Company[]> {
+  // Return the real YC companies data instead of mock data
+  return YC_CLIMATE_COMPANIES;
 } 

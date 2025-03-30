@@ -1,13 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Company } from '@/utils/scraper';
-
-interface CompanyListProps {
-  companies: Company[];
-  sectors: string[];
-  fundingStages: string[];
-}
+import { Company, CompanyListProps } from '../types';
 
 export default function CompanyList({ companies, sectors, fundingStages }: CompanyListProps) {
   const [filteredCompanies, setFilteredCompanies] = useState(companies);
@@ -60,77 +54,81 @@ export default function CompanyList({ companies, sectors, fundingStages }: Compa
       </div>
 
       {/* Company Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCompanies.map((company) => (
           <div
             key={company.name}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
           >
             <div className="p-6">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center mb-4">
                 <img
                   src={company.logo}
                   alt={`${company.name} logo`}
-                  className="h-12 w-12 rounded-full object-contain"
+                  className="w-12 h-12 rounded-full mr-4"
                 />
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{company.name}</h3>
+                  <h3 className="text-xl font-semibold text-gray-900">{company.name}</h3>
                   <p className="text-sm text-gray-500">{company.sector}</p>
                 </div>
               </div>
-              <p className="mt-4 text-gray-600">{company.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <p className="text-gray-600 mb-4">{company.description}</p>
+              <div className="space-y-2">
                 {company.funding && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    {company.funding}
-                  </span>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-medium">Funding:</span> {company.funding}
+                  </p>
                 )}
                 {company.founded && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    Founded {company.founded}
-                  </span>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-medium">Founded:</span> {company.founded}
+                  </p>
                 )}
                 {company.teamSize && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                    {company.teamSize} employees
-                  </span>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-medium">Team Size:</span> {company.teamSize}
+                  </p>
                 )}
                 {company.location && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                    {company.location}
-                  </span>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-medium">Location:</span> {company.location}
+                  </p>
                 )}
               </div>
               {company.keyMetrics && (
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <h4 className="text-sm font-medium text-gray-900">Key Metrics</h4>
-                  <div className="mt-2 grid grid-cols-2 gap-4">
+                <div className="mt-4 pt-4 border-t">
+                  <h4 className="text-sm font-medium text-gray-900 mb-2">Key Metrics</h4>
+                  <div className="space-y-1">
                     {company.keyMetrics.carbonReduction && (
-                      <div>
-                        <p className="text-sm text-gray-500">Carbon Reduction</p>
-                        <p className="text-sm font-medium text-gray-900">{company.keyMetrics.carbonReduction}</p>
-                      </div>
+                      <p className="text-sm text-gray-500">
+                        <span className="font-medium">Carbon Reduction:</span>{' '}
+                        {company.keyMetrics.carbonReduction}
+                      </p>
                     )}
                     {company.keyMetrics.fundingAmount && (
-                      <div>
-                        <p className="text-sm text-gray-500">Funding</p>
-                        <p className="text-sm font-medium text-gray-900">{company.keyMetrics.fundingAmount}</p>
-                      </div>
+                      <p className="text-sm text-gray-500">
+                        <span className="font-medium">Funding Amount:</span>{' '}
+                        {company.keyMetrics.fundingAmount}
+                      </p>
+                    )}
+                    {company.keyMetrics.customers && (
+                      <p className="text-sm text-gray-500">
+                        <span className="font-medium">Customers:</span>{' '}
+                        {company.keyMetrics.customers}
+                      </p>
                     )}
                   </div>
                 </div>
               )}
               {company.website && (
-                <div className="mt-4">
-                  <a
-                    href={company.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-green-600 hover:text-green-500"
-                  >
-                    Visit Website →
-                  </a>
-                </div>
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block text-green-600 hover:text-green-700"
+                >
+                  Visit Website →
+                </a>
               )}
             </div>
           </div>
