@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +10,9 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartConfiguration,
   LineController
 } from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import { Company } from '../types';
 
 // Register ChartJS components
@@ -81,7 +81,7 @@ export default function SectorROITimeline({ companies }: SectorROITimelineProps)
       };
     });
 
-    const config: ChartConfiguration = {
+    const config: ChartJS.ChartConfiguration = {
       type: 'line',
       data: {
         labels: years,
