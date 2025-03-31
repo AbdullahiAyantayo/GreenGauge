@@ -5,6 +5,7 @@ import { Company } from '../../types';
 import { getCompanies, getUniqueSectors, getUniqueFundingStages } from '../../utils/scraper';
 import CompanyList from '../../components/CompanyList';
 import ChatBot from '../../components/ChatBot';
+import Navigation from '../../components/Navigation';
 
 export default function CompaniesPage() {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -38,16 +39,19 @@ export default function CompaniesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Climate Tech Companies</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <CompanyList 
-            companies={companies} 
-            sectors={sectors}
-            fundingStages={fundingStages}
-          />
-          <ChatBot companies={companies} />
+    <main className="min-h-screen bg-gray-100">
+      <Navigation />
+      <div className="p-8">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">Climate Tech Companies</h1>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <CompanyList 
+              companies={companies} 
+              sectors={sectors}
+              fundingStages={fundingStages}
+            />
+            <ChatBot companies={companies} />
+          </div>
         </div>
       </div>
     </main>

@@ -5,6 +5,8 @@ import { Company } from '../../types';
 import { getCompanies } from '../../utils/scraper';
 import SectorGrowthTimeline from '../../components/SectorGrowthTimeline';
 import SectorROITimeline from '../../components/SectorROITimeline';
+import SectorVisualization from '../../components/SectorVisualization';
+import Navigation from '../../components/Navigation';
 
 export default function SectorsPage() {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -34,12 +36,12 @@ export default function SectorsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Sector Analysis</h1>
-        <div className="space-y-8">
-          <SectorGrowthTimeline companies={companies} />
-          <SectorROITimeline companies={companies} />
+    <main className="min-h-screen bg-gray-100">
+      <Navigation />
+      <div className="p-8">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">Sector Analysis</h1>
+          <SectorVisualization companies={companies} />
         </div>
       </div>
     </main>

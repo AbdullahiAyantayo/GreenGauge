@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Company } from '../../types';
 import { getCompanies } from '../../utils/scraper';
 import InvestmentEvaluation from '../../components/InvestmentEvaluation';
+import Navigation from '../../components/Navigation';
 
 export default function InvestmentsPage() {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -33,10 +34,13 @@ export default function InvestmentsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Investment Analysis</h1>
-        <InvestmentEvaluation companies={companies} />
+    <main className="min-h-screen bg-gray-100">
+      <Navigation />
+      <div className="p-8">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">Investment Analysis</h1>
+          <InvestmentEvaluation companies={companies} />
+        </div>
       </div>
     </main>
   );
