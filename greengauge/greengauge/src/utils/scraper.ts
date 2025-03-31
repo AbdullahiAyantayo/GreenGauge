@@ -36,7 +36,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Somerville, MA",
     keyMetrics: {
       carbonReduction: "Zero-emission cement",
-      fundingAmount: "$40M+"
+      fundingAmount: "$40M+",
+      customers: "Construction companies"
     }
   },
   {
@@ -71,7 +72,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "San Francisco, CA",
     keyMetrics: {
       carbonReduction: "Carbon negative",
-      fundingAmount: "$100M+"
+      fundingAmount: "$100M+",
+      customers: "Carbon credit buyers"
     }
   },
   {
@@ -88,7 +90,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "San Francisco, CA",
     keyMetrics: {
       carbonReduction: "Enhanced photosynthesis",
-      fundingAmount: "$15M+"
+      fundingAmount: "$15M+",
+      customers: "Forest owners"
     }
   },
   {
@@ -123,7 +126,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Denver, CO",
     keyMetrics: {
       carbonReduction: "Flare gas reduction",
-      fundingAmount: "$350M+"
+      fundingAmount: "$350M+",
+      customers: "Oil and gas companies"
     }
   },
   {
@@ -140,7 +144,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Los Angeles, CA",
     keyMetrics: {
       carbonReduction: "Zero-emission transport",
-      fundingAmount: "$50M+"
+      fundingAmount: "$50M+",
+      customers: "Rail operators"
     }
   },
   {
@@ -157,7 +162,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Vancouver, BC",
     keyMetrics: {
       carbonReduction: "Battery reuse",
-      fundingAmount: "$4.5M+"
+      fundingAmount: "$4.5M+",
+      customers: "Grid operators"
     }
   },
   {
@@ -192,7 +198,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Somerville, MA",
     keyMetrics: {
       carbonReduction: "Grid decarbonization",
-      fundingAmount: "$450M+"
+      fundingAmount: "$450M+",
+      customers: "Utilities"
     }
   },
   {
@@ -209,7 +216,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Hollister, CA",
     keyMetrics: {
       carbonReduction: "Zero-emission aviation",
-      fundingAmount: "$115M+"
+      fundingAmount: "$115M+",
+      customers: "Airlines"
     }
   },
   {
@@ -226,7 +234,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "San Francisco, CA",
     keyMetrics: {
       carbonReduction: "Forest conservation",
-      fundingAmount: "$79M+"
+      fundingAmount: "$79M+",
+      customers: "Carbon credit buyers"
     }
   },
   {
@@ -243,7 +252,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "San Francisco, CA",
     keyMetrics: {
       carbonReduction: "Direct air capture",
-      fundingAmount: "$53M+"
+      fundingAmount: "$53M+",
+      customers: "Carbon credit buyers"
     }
   },
   {
@@ -260,7 +270,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Redwood City, CA",
     keyMetrics: {
       carbonReduction: "Biodegradable plastics",
-      fundingAmount: "$15M+"
+      fundingAmount: "$15M+",
+      customers: "Manufacturers"
     }
   },
   {
@@ -277,7 +288,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Oakland, CA",
     keyMetrics: {
       carbonReduction: "Zero-carbon cement",
-      fundingAmount: "$5M+"
+      fundingAmount: "$5M+",
+      customers: "Construction companies"
     }
   },
   {
@@ -294,7 +306,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Santa Clara, CA",
     keyMetrics: {
       carbonReduction: "Space sustainability",
-      fundingAmount: "$100M+"
+      fundingAmount: "$100M+",
+      customers: "Space companies"
     }
   },
   {
@@ -311,7 +324,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Squamish, BC",
     keyMetrics: {
       carbonReduction: "Direct air capture",
-      fundingAmount: "$100M+"
+      fundingAmount: "$100M+",
+      customers: "Carbon credit buyers"
     }
   },
   {
@@ -328,7 +342,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Shenzhen, China",
     keyMetrics: {
       carbonReduction: "Clean power",
-      fundingAmount: "$100M+"
+      fundingAmount: "$100M+",
+      customers: "Consumers"
     }
   },
   {
@@ -345,7 +360,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "San Francisco, CA",
     keyMetrics: {
       carbonReduction: "EV charging",
-      fundingAmount: "$600M+"
+      fundingAmount: "$600M+",
+      customers: "EV drivers"
     }
   },
   {
@@ -362,7 +378,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Cambridge, MA",
     keyMetrics: {
       carbonReduction: "Fusion energy",
-      fundingAmount: "$2B+"
+      fundingAmount: "$2B+",
+      customers: "Utilities"
     }
   },
   {
@@ -397,7 +414,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Carson City, NV",
     keyMetrics: {
       carbonReduction: "Battery recycling",
-      fundingAmount: "$700M+"
+      fundingAmount: "$700M+",
+      customers: "Automakers"
     }
   },
   {
@@ -414,7 +432,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Skokie, IL",
     keyMetrics: {
       carbonReduction: "Carbon recycling",
-      fundingAmount: "$200M+"
+      fundingAmount: "$200M+",
+      customers: "Industrial companies"
     }
   },
   {
@@ -449,7 +468,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Paris, France",
     keyMetrics: {
       carbonReduction: "Supply chain sustainability",
-      fundingAmount: "$500M+"
+      fundingAmount: "$500M+",
+      customers: "Global companies"
     }
   },
   {
@@ -466,7 +486,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Halifax, Canada",
     keyMetrics: {
       carbonReduction: "Concrete decarbonization",
-      fundingAmount: "$80M+"
+      fundingAmount: "$80M+",
+      customers: "Concrete producers"
     }
   },
   {
@@ -519,7 +540,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "San Francisco, CA",
     keyMetrics: {
       carbonReduction: "Battery innovation",
-      fundingAmount: "$5M+"
+      fundingAmount: "$5M+",
+      customers: "Battery manufacturers"
     }
   },
   {
@@ -538,24 +560,6 @@ const YC_CLIMATE_COMPANIES: Company[] = [
       carbonReduction: "Concrete decarbonization",
       fundingAmount: "$10M+",
       customers: "Construction companies"
-    }
-  },
-  {
-    name: "Sila Nanotechnologies",
-    description: "Next-generation battery materials",
-    logo: "https://ui-avatars.com/api/?name=Sila+Nano&background=0D9488&color=fff",
-    accelerator: "YC",
-    sector: "Energy Storage",
-    website: "https://silanano.com",
-    funding: "Series F",
-    fundingStage: "Series F",
-    founded: 2011,
-    teamSize: "200+",
-    location: "Alameda, CA",
-    keyMetrics: {
-      carbonReduction: "Battery innovation",
-      fundingAmount: "$900M+",
-      customers: "Major automakers"
     }
   }
 ].map(company => ({
