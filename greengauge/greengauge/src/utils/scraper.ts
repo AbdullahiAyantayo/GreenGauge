@@ -15,6 +15,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2013,
     teamSize: "100+",
     location: "Everett, WA",
+    fundingStage: "Series E",
     keyMetrics: {
       carbonReduction: "Zero-emission energy",
       fundingAmount: "$500M+",
@@ -32,6 +33,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "50+",
     location: "Somerville, MA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Zero-emission cement",
       fundingAmount: "$40M+"
@@ -48,6 +50,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2015,
     teamSize: "100+",
     location: "Berkeley, CA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "CO2 to products",
       fundingAmount: "$200M+",
@@ -65,6 +68,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2018,
     teamSize: "50+",
     location: "San Francisco, CA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Carbon negative",
       fundingAmount: "$100M+"
@@ -81,6 +85,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "30+",
     location: "San Francisco, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Enhanced photosynthesis",
       fundingAmount: "$15M+"
@@ -97,6 +102,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "200+",
     location: "San Francisco, CA",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Carbon accounting",
       fundingAmount: "$100M+",
@@ -114,6 +120,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2018,
     teamSize: "150+",
     location: "Denver, CO",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Flare gas reduction",
       fundingAmount: "$350M+"
@@ -130,6 +137,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "40+",
     location: "Los Angeles, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Zero-emission transport",
       fundingAmount: "$50M+"
@@ -146,6 +154,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "20+",
     location: "Vancouver, BC",
+    fundingStage: "Seed",
     keyMetrics: {
       carbonReduction: "Battery reuse",
       fundingAmount: "$4.5M+"
@@ -162,6 +171,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "50+",
     location: "New York, NY",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Carbon credits",
       fundingAmount: "$60M+",
@@ -179,6 +189,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2017,
     teamSize: "200+",
     location: "Somerville, MA",
+    fundingStage: "Series D",
     keyMetrics: {
       carbonReduction: "Grid decarbonization",
       fundingAmount: "$450M+"
@@ -195,6 +206,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2017,
     teamSize: "150+",
     location: "Hollister, CA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Zero-emission aviation",
       fundingAmount: "$115M+"
@@ -211,6 +223,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2018,
     teamSize: "50+",
     location: "San Francisco, CA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Forest conservation",
       fundingAmount: "$79M+"
@@ -227,6 +240,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "30+",
     location: "San Francisco, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Direct air capture",
       fundingAmount: "$53M+"
@@ -243,6 +257,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2010,
     teamSize: "30+",
     location: "Redwood City, CA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Biodegradable plastics",
       fundingAmount: "$15M+"
@@ -259,6 +274,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "20+",
     location: "Oakland, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Zero-carbon cement",
       fundingAmount: "$5M+"
@@ -275,6 +291,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2017,
     teamSize: "100+",
     location: "Santa Clara, CA",
+    fundingStage: "Public",
     keyMetrics: {
       carbonReduction: "Space sustainability",
       fundingAmount: "$100M+"
@@ -291,6 +308,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2009,
     teamSize: "100+",
     location: "Squamish, BC",
+    fundingStage: "Private",
     keyMetrics: {
       carbonReduction: "Direct air capture",
       fundingAmount: "$100M+"
@@ -307,6 +325,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2017,
     teamSize: "200+",
     location: "Shenzhen, China",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Clean power",
       fundingAmount: "$100M+"
@@ -323,6 +342,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2010,
     teamSize: "500+",
     location: "San Francisco, CA",
+    fundingStage: "Public",
     keyMetrics: {
       carbonReduction: "EV charging",
       fundingAmount: "$600M+"
@@ -339,6 +359,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2018,
     teamSize: "200+",
     location: "Cambridge, MA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Fusion energy",
       fundingAmount: "$2B+"
@@ -355,6 +376,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2011,
     teamSize: "200+",
     location: "Alameda, CA",
+    fundingStage: "Series F",
     keyMetrics: {
       carbonReduction: "Battery innovation",
       fundingAmount: "$900M+"
@@ -371,6 +393,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2017,
     teamSize: "300+",
     location: "Carson City, NV",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Battery recycling",
       fundingAmount: "$700M+"
@@ -387,6 +410,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2005,
     teamSize: "200+",
     location: "Skokie, IL",
+    fundingStage: "Public",
     keyMetrics: {
       carbonReduction: "Carbon recycling",
       fundingAmount: "$200M+"
@@ -394,18 +418,20 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   },
   {
     name: "Carbon Clean",
-    description: "Carbon capture technology",
+    description: "Carbon capture technology for industrial emissions",
     logo: "https://ui-avatars.com/api/?name=Carbon+Clean&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Carbon Capture",
-    website: "https://carbonclean.com",
+    website: "https://www.carbonclean.com",
     funding: "Series C",
     founded: 2009,
-    teamSize: "100+",
+    teamSize: "50-100",
     location: "London, UK",
+    fundingStage: "Series C",
     keyMetrics: {
-      carbonReduction: "Industrial decarbonization",
-      fundingAmount: "$150M+"
+      carbonReduction: "100K tons CO2/year",
+      fundingAmount: "$150M",
+      customers: "Chevron, Cemex"
     }
   },
   {
@@ -419,6 +445,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2007,
     teamSize: "500+",
     location: "Paris, France",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Supply chain sustainability",
       fundingAmount: "$500M+"
@@ -435,6 +462,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2012,
     teamSize: "100+",
     location: "Halifax, Canada",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Concrete decarbonization",
       fundingAmount: "$80M+"
@@ -451,6 +479,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2014,
     teamSize: "200+",
     location: "Denver, CO",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Recycling automation",
       fundingAmount: "$150M+"
@@ -458,7 +487,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
   },
   {
     name: "BlocPower",
-    description: "Clean energy for buildings",
+    description: "Clean energy technology for buildings",
     logo: "https://ui-avatars.com/api/?name=BlocPower&background=0D9488&color=fff",
     accelerator: "YC",
     sector: "Clean Energy",
@@ -467,6 +496,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2014,
     teamSize: "100+",
     location: "Brooklyn, NY",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Building decarbonization",
       fundingAmount: "$100M+"
@@ -483,6 +513,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "20+",
     location: "San Francisco, CA",
+    fundingStage: "Seed",
     keyMetrics: {
       carbonReduction: "Battery innovation",
       fundingAmount: "$5M+"
@@ -499,6 +530,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2009,
     teamSize: "100+",
     location: "Squamish, BC",
+    fundingStage: "Private",
     keyMetrics: {
       carbonReduction: "Direct air capture",
       fundingAmount: "$100M+"
@@ -515,6 +547,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "50+",
     location: "New York, NY",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "Carbon credits",
       fundingAmount: "$60M+",
@@ -532,6 +565,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "30+",
     location: "San Francisco, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Enhanced photosynthesis",
       fundingAmount: "$15M+"
@@ -548,6 +582,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2019,
     teamSize: "200+",
     location: "San Francisco, CA",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Carbon accounting",
       fundingAmount: "$100M+",
@@ -565,6 +600,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2018,
     teamSize: "150+",
     location: "Denver, CO",
+    fundingStage: "Series C",
     keyMetrics: {
       carbonReduction: "Flare gas reduction",
       fundingAmount: "$350M+"
@@ -581,6 +617,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "40+",
     location: "Los Angeles, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "Zero-emission transport",
       fundingAmount: "$50M+"
@@ -597,9 +634,70 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     founded: 2020,
     teamSize: "20+",
     location: "Vancouver, BC",
+    fundingStage: "Seed",
     keyMetrics: {
       carbonReduction: "Battery reuse",
       fundingAmount: "$4.5M+"
+    }
+  },
+  {
+    name: "CarbonBuilt",
+    description: "Low-carbon concrete technology",
+    logo: "https://ui-avatars.com/api/?name=CarbonBuilt&background=0D9488&color=fff",
+    accelerator: "YC",
+    sector: "Carbon Capture",
+    website: "https://carbonbuilt.com",
+    funding: "Series A",
+    fundingStage: "Series A",
+    keyMetrics: {
+      carbonReduction: "100K tons CO2/year",
+      fundingAmount: "$10M",
+      customers: "Concrete producers"
+    }
+  },
+  {
+    name: "AMP Robotics",
+    description: "AI-powered recycling technology",
+    logo: "https://ui-avatars.com/api/?name=AMP+Robotics&background=0D9488&color=fff",
+    accelerator: "YC",
+    sector: "Recycling",
+    website: "https://www.amprobotics.com",
+    funding: "Series C",
+    fundingStage: "Series C",
+    keyMetrics: {
+      carbonReduction: "200K tons CO2/year",
+      fundingAmount: "$91M",
+      customers: "Waste management companies"
+    }
+  },
+  {
+    name: "BlocPower",
+    description: "Clean energy technology for buildings",
+    logo: "https://ui-avatars.com/api/?name=BlocPower&background=0D9488&color=fff",
+    accelerator: "YC",
+    sector: "Clean Energy",
+    website: "https://blocpower.io",
+    funding: "Series B",
+    fundingStage: "Series B",
+    keyMetrics: {
+      carbonReduction: "150K tons CO2/year",
+      fundingAmount: "$63M",
+      customers: "Building owners"
+    }
+  },
+  {
+    name: "Sila Nanotechnologies",
+    description: "Next-generation battery materials",
+    logo: "https://ui-avatars.com/api/?name=Sila+Nano&background=0D9488&color=fff",
+    accelerator: "YC",
+    sector: "Energy Storage",
+    website: "https://silanano.com",
+    funding: "Series F",
+    fundingStage: "Series F",
+    keyMetrics: {
+      carbonReduction: "300K tons CO2/year",
+      fundingAmount: "$930M",
+      customers: "Automotive manufacturers"
     }
   }
 ].map(company => ({
@@ -660,6 +758,7 @@ const mockCompanies: Company[] = [
     founded: 2020,
     teamSize: "11-50",
     location: "San Francisco, CA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "100,000 tons CO2/year",
       fundingAmount: "$12M",
@@ -677,6 +776,7 @@ const mockCompanies: Company[] = [
     founded: 2021,
     teamSize: "1-10",
     location: "Austin, TX",
+    fundingStage: "Seed",
     keyMetrics: {
       carbonReduction: "50,000 tons CO2/year",
       fundingAmount: "$2.5M",
@@ -694,6 +794,7 @@ const mockCompanies: Company[] = [
     founded: 2019,
     teamSize: "51-200",
     location: "Los Angeles, CA",
+    fundingStage: "Series B",
     keyMetrics: {
       carbonReduction: "200,000 tons CO2/year",
       fundingAmount: "$45M",
@@ -711,6 +812,7 @@ const mockCompanies: Company[] = [
     founded: 2020,
     teamSize: "11-50",
     location: "Boston, MA",
+    fundingStage: "Series A",
     keyMetrics: {
       carbonReduction: "75,000 tons CO2/year",
       fundingAmount: "$8M",
@@ -728,6 +830,7 @@ const mockCompanies: Company[] = [
     founded: 2022,
     teamSize: "1-10",
     location: "Chicago, IL",
+    fundingStage: "Seed",
     keyMetrics: {
       carbonReduction: "30,000 tons CO2/year",
       fundingAmount: "$1.5M",
