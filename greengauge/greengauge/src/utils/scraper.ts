@@ -714,7 +714,12 @@ const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
     accelerator: "Techstars",
     sector: "Materials",
     website: "https://www.carboncure.com",
-    funding: "Series B"
+    funding: "Series B",
+    fundingStage: "Series B",
+    keyMetrics: {
+      carbonReduction: "Concrete decarbonization",
+      fundingAmount: "$80M+"
+    }
   },
   {
     name: "AMP Robotics",
@@ -723,7 +728,12 @@ const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
     accelerator: "Techstars",
     sector: "Recycling",
     website: "https://www.amprobotics.com",
-    funding: "Series C"
+    funding: "Series C",
+    fundingStage: "Series C",
+    keyMetrics: {
+      carbonReduction: "Recycling automation",
+      fundingAmount: "$150M+"
+    }
   },
   {
     name: "BlocPower",
@@ -732,7 +742,12 @@ const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
     accelerator: "Techstars",
     sector: "Clean Energy",
     website: "https://www.blocpower.io",
-    funding: "Series B"
+    funding: "Series B",
+    fundingStage: "Series B",
+    keyMetrics: {
+      carbonReduction: "Building decarbonization",
+      fundingAmount: "$100M+"
+    }
   },
   {
     name: "Nexus Power",
@@ -741,7 +756,12 @@ const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
     accelerator: "Techstars",
     sector: "Energy Storage",
     website: "https://www.nexuspower.com",
-    funding: "Seed"
+    funding: "Seed",
+    fundingStage: "Seed",
+    keyMetrics: {
+      carbonReduction: "Battery innovation",
+      fundingAmount: "$5M+"
+    }
   }
 ];
 
