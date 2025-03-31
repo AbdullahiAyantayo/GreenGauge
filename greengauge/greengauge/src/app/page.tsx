@@ -1,61 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Company } from '../types';
-import { getCompanies, getUniqueSectors, getUniqueFundingStages } from '../utils/scraper';
-import CompanyList from '../components/CompanyList';
-import ChatBot from '../components/ChatBot';
-import SectorGrowthTimeline from '../components/SectorGrowthTimeline';
-import SectorROITimeline from '../components/SectorROITimeline';
-import InvestmentEvaluation from '../components/InvestmentEvaluation';
+import Link from 'next/link';
 
 export default function Home() {
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [sectors, setSectors] = useState<string[]>([]);
-  const [fundingStages, setFundingStages] = useState<string[]>([]);
-
-  useEffect(() => {
-    const fetchCompanies = async () => {
-      try {
-        const data = await getCompanies();
-        setCompanies(data);
-        setSectors(getUniqueSectors(data));
-        setFundingStages(getUniqueFundingStages(data));
-      } catch (error) {
-        console.error('Error fetching companies:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCompanies();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-2xl font-semibold text-gray-700">Loading...</div>
-      </div>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <CompanyList 
-            companies={companies} 
-            sectors={sectors}
-            fundingStages={fundingStages}
-          />
-          <ChatBot companies={companies} />
-        </div>
-
-        <div className="space-y-8">
-          <SectorGrowthTimeline companies={companies} />
-          <SectorROITimeline companies={companies} />
-          <InvestmentEvaluation companies={companies} />
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-900 mb-8">GreenGauge</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <Link href="/companies" className="block">
+            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Companies</h2>
+              <p className="text-gray-600">Browse climate tech companies and interact with our AI assistant</p>
+            </div>
+          </Link>
+          
+          <Link href="/sectors" className="block">
+            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Sectors</h2>
+              <p className="text-gray-600">Analyze sector growth and ROI trends</p>
+            </div>
+          </Link>
+          
+          <Link href="/investments" className="block">
+            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">Investments</h2>
+              <p className="text-gray-600">Evaluate investment opportunities and market trends</p>
+            </div>
+          </Link>
         </div>
       </div>
     </main>
