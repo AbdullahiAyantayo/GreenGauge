@@ -483,7 +483,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Denver, CO",
     keyMetrics: {
       carbonReduction: "Recycling automation",
-      fundingAmount: "$150M+"
+      fundingAmount: "$150M+",
+      customers: "Waste management companies"
     }
   },
   {
@@ -500,7 +501,8 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     location: "Brooklyn, NY",
     keyMetrics: {
       carbonReduction: "Building decarbonization",
-      fundingAmount: "$100M+"
+      fundingAmount: "$100M+",
+      customers: "Building owners"
     }
   },
   {
@@ -539,36 +541,6 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     }
   },
   {
-    name: "AMP Robotics",
-    description: "AI-powered recycling technology",
-    logo: "https://ui-avatars.com/api/?name=AMP+Robotics&background=0D9488&color=fff",
-    accelerator: "YC",
-    sector: "Recycling",
-    website: "https://www.amprobotics.com",
-    funding: "Series C",
-    fundingStage: "Series C",
-    keyMetrics: {
-      carbonReduction: "200K tons CO2/year",
-      fundingAmount: "$91M",
-      customers: "Waste management companies"
-    }
-  },
-  {
-    name: "BlocPower",
-    description: "Clean energy technology for buildings",
-    logo: "https://ui-avatars.com/api/?name=BlocPower&background=0D9488&color=fff",
-    accelerator: "YC",
-    sector: "Clean Energy",
-    website: "https://blocpower.io",
-    funding: "Series B",
-    fundingStage: "Series B",
-    keyMetrics: {
-      carbonReduction: "150K tons CO2/year",
-      fundingAmount: "$63M",
-      customers: "Building owners"
-    }
-  },
-  {
     name: "Sila Nanotechnologies",
     description: "Next-generation battery materials",
     logo: "https://ui-avatars.com/api/?name=Sila+Nano&background=0D9488&color=fff",
@@ -577,10 +549,13 @@ const YC_CLIMATE_COMPANIES: Company[] = [
     website: "https://silanano.com",
     funding: "Series F",
     fundingStage: "Series F",
+    founded: 2011,
+    teamSize: "200+",
+    location: "Alameda, CA",
     keyMetrics: {
-      carbonReduction: "300K tons CO2/year",
-      fundingAmount: "$930M",
-      customers: "Automotive manufacturers"
+      carbonReduction: "Battery innovation",
+      fundingAmount: "$900M+",
+      customers: "Major automakers"
     }
   }
 ].map(company => ({
