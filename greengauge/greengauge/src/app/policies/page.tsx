@@ -14,15 +14,56 @@ interface Policy {
 }
 
 const POLICIES: Policy[] = [
+  // US Federal Policies
   {
     name: 'Inflation Reduction Act (IRA)',
-    description: 'Comprehensive climate and energy legislation providing tax credits and incentives for clean energy deployment.',
+    description: 'Comprehensive climate and energy legislation providing $369B in climate investments, tax credits, and incentives for clean energy deployment.',
     region: 'United States',
     sector: 'Clean Energy',
     impactLevel: 'High',
-    taxIncentives: ['Investment Tax Credit', 'Production Tax Credit'],
+    taxIncentives: ['Investment Tax Credit', 'Production Tax Credit', 'EV Tax Credits'],
     status: 'Active'
   },
+  {
+    name: 'Bipartisan Infrastructure Law',
+    description: '$1.2T infrastructure package including significant funding for clean energy, EV charging, and climate resilience.',
+    region: 'United States',
+    sector: 'Multiple',
+    impactLevel: 'High',
+    taxIncentives: ['Grid Modernization', 'EV Infrastructure'],
+    status: 'Active'
+  },
+  {
+    name: 'Clean Air Act',
+    description: 'Federal law regulating air emissions and setting standards for air quality.',
+    region: 'United States',
+    sector: 'Multiple',
+    impactLevel: 'High',
+    taxIncentives: ['Emissions Trading', 'Clean Air Permits'],
+    status: 'Active'
+  },
+
+  // US State Policies
+  {
+    name: 'California Climate Action Plan',
+    description: 'State-level initiative to achieve carbon neutrality by 2045, including incentives for electric vehicles and renewable energy.',
+    region: 'United States',
+    sector: 'Transportation',
+    impactLevel: 'High',
+    taxIncentives: ['EV Tax Credits', 'Solar Incentives'],
+    status: 'Active'
+  },
+  {
+    name: 'New York Climate Act',
+    description: 'Comprehensive climate legislation targeting 70% renewable energy by 2030 and net-zero emissions by 2050.',
+    region: 'United States',
+    sector: 'Clean Energy',
+    impactLevel: 'High',
+    taxIncentives: ['Offshore Wind Credits', 'Building Electrification'],
+    status: 'Active'
+  },
+
+  // European Union Policies
   {
     name: 'EU Green Deal',
     description: 'European Union\'s plan to make Europe climate neutral by 2050, including significant funding for green technologies.',
@@ -33,12 +74,50 @@ const POLICIES: Policy[] = [
     status: 'Active'
   },
   {
-    name: 'California Climate Action Plan',
-    description: 'State-level initiative to achieve carbon neutrality by 2045, including incentives for electric vehicles and renewable energy.',
-    region: 'United States',
-    sector: 'Transportation',
+    name: 'Fit for 55 Package',
+    description: 'EU legislative package to reduce greenhouse gas emissions by 55% by 2030.',
+    region: 'Europe',
+    sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['EV Tax Credits', 'Solar Incentives'],
+    taxIncentives: ['ETS Reform', 'Carbon Border Tax'],
+    status: 'Active'
+  },
+  {
+    name: 'EU Taxonomy',
+    description: 'Classification system for sustainable economic activities, guiding investments in climate-friendly projects.',
+    region: 'Europe',
+    sector: 'Finance',
+    impactLevel: 'High',
+    taxIncentives: ['Sustainable Finance', 'Green Bonds'],
+    status: 'Active'
+  },
+
+  // European National Policies
+  {
+    name: 'German Climate Action Law',
+    description: 'Legislation targeting climate neutrality by 2045 with specific sector targets.',
+    region: 'Europe',
+    sector: 'Multiple',
+    impactLevel: 'High',
+    taxIncentives: ['Renewable Energy Support', 'Carbon Pricing'],
+    status: 'Active'
+  },
+  {
+    name: 'French Climate and Resilience Law',
+    description: 'Comprehensive climate legislation including building renovation and transportation measures.',
+    region: 'Europe',
+    sector: 'Multiple',
+    impactLevel: 'High',
+    taxIncentives: ['Building Renovation', 'Clean Transportation'],
+    status: 'Active'
+  },
+  {
+    name: 'UK Net Zero Strategy',
+    description: 'Comprehensive plan to achieve net-zero emissions by 2050 across all sectors.',
+    region: 'Europe',
+    sector: 'Multiple',
+    impactLevel: 'High',
+    taxIncentives: ['Carbon Trading', 'Clean Energy Support'],
     status: 'Active'
   }
 ];
