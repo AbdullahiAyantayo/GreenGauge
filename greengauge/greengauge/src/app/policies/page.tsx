@@ -2,221 +2,239 @@
 
 import { useState } from 'react';
 import PolicyFilter from '@/components/PolicyFilter';
+import Disclaimer from '@/components/Disclaimer';
 
 interface Policy {
   name: string;
   description: string;
   region: string;
   sector: string;
-  impactLevel: 'High' | 'Medium' | 'Low';
-  taxIncentives: string[];
-  status: 'Active' | 'Proposed' | 'Expired';
+  impactLevel: string;
+  taxIncentive: string;
+  status: string;
+  year: number;
 }
 
 const POLICIES: Policy[] = [
   // US Federal Policies
   {
     name: 'Inflation Reduction Act (IRA)',
-    description: 'Comprehensive climate and energy legislation providing $369B in climate investments, tax credits, and incentives for clean energy deployment.',
+    description: 'Comprehensive climate legislation providing $369B in climate investments and tax credits for clean energy, transportation, and industrial decarbonization.',
     region: 'United States',
-    sector: 'Clean Energy',
+    sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['Investment Tax Credit', 'Production Tax Credit', 'EV Tax Credits'],
-    status: 'Active'
+    taxIncentive: 'Investment Tax Credit',
+    status: 'Active',
+    year: 2022
   },
   {
     name: 'Bipartisan Infrastructure Law',
-    description: '$1.2T infrastructure package including significant funding for clean energy, EV charging, and climate resilience.',
+    description: '$1.2 trillion infrastructure package including significant investments in clean energy, electric vehicles, and climate resilience.',
     region: 'United States',
     sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['Grid Modernization', 'EV Infrastructure'],
-    status: 'Active'
+    taxIncentive: 'Clean Transportation',
+    status: 'Active',
+    year: 2021
   },
   {
     name: 'Clean Air Act',
-    description: 'Federal law regulating air emissions and setting standards for air quality.',
+    description: 'Established regulatory framework for air pollution control and greenhouse gas emissions.',
     region: 'United States',
-    sector: 'Multiple',
+    sector: 'Clean Energy',
     impactLevel: 'High',
-    taxIncentives: ['Emissions Trading', 'Clean Air Permits'],
-    status: 'Active'
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 1970
   },
 
   // US State Policies
   {
     name: 'California Climate Action Plan',
-    description: 'State-level initiative to achieve carbon neutrality by 2045, including incentives for electric vehicles and renewable energy.',
+    description: 'Comprehensive plan to achieve carbon neutrality by 2045, including cap-and-trade program and renewable energy mandates.',
     region: 'United States',
-    sector: 'Transportation',
+    sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['EV Tax Credits', 'Solar Incentives'],
-    status: 'Active'
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 2022
   },
   {
     name: 'New York Climate Act',
-    description: 'Comprehensive climate legislation targeting 70% renewable energy by 2030 and net-zero emissions by 2050.',
+    description: 'Legislation mandating 85% reduction in greenhouse gas emissions by 2050 and 100% zero-emission electricity by 2040.',
     region: 'United States',
     sector: 'Clean Energy',
     impactLevel: 'High',
-    taxIncentives: ['Offshore Wind Credits', 'Building Electrification'],
-    status: 'Active'
+    taxIncentive: 'Renewable Energy Support',
+    status: 'Active',
+    year: 2019
   },
 
   // European Union Policies
   {
     name: 'EU Green Deal',
-    description: 'European Union\'s plan to make Europe climate neutral by 2050, including significant funding for green technologies.',
+    description: 'Comprehensive plan to make Europe climate neutral by 2050, including €1 trillion investment plan.',
     region: 'Europe',
     sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['Carbon Border Adjustment', 'Renewable Energy Support'],
-    status: 'Active'
+    taxIncentive: 'Carbon Border Tax',
+    status: 'Active',
+    year: 2019
   },
   {
     name: 'Fit for 55 Package',
-    description: 'EU legislative package to reduce greenhouse gas emissions by 55% by 2030.',
+    description: 'Set of proposals to revise EU climate, energy, and transport legislation to reduce net greenhouse gas emissions by 55% by 2030.',
     region: 'Europe',
     sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['ETS Reform', 'Carbon Border Tax'],
-    status: 'Active'
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 2021
   },
   {
     name: 'EU Taxonomy',
-    description: 'Classification system for sustainable economic activities, guiding investments in climate-friendly projects.',
+    description: 'Classification system establishing a list of environmentally sustainable economic activities.',
     region: 'Europe',
     sector: 'Finance',
-    impactLevel: 'High',
-    taxIncentives: ['Sustainable Finance', 'Green Bonds'],
-    status: 'Active'
+    impactLevel: 'Medium',
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 2020
   },
 
   // European National Policies
   {
     name: 'German Climate Action Law',
-    description: 'Legislation targeting climate neutrality by 2045 with specific sector targets.',
+    description: 'Legislation setting binding targets for greenhouse gas emissions reduction and establishing carbon pricing.',
     region: 'Europe',
     sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['Renewable Energy Support', 'Carbon Pricing'],
-    status: 'Active'
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 2019
   },
   {
     name: 'French Climate and Resilience Law',
-    description: 'Comprehensive climate legislation including building renovation and transportation measures.',
+    description: 'Comprehensive climate legislation including building renovation requirements and transportation decarbonization measures.',
     region: 'Europe',
-    sector: 'Multiple',
+    sector: 'Building',
     impactLevel: 'High',
-    taxIncentives: ['Building Renovation', 'Clean Transportation'],
-    status: 'Active'
+    taxIncentive: 'Building Renovation',
+    status: 'Active',
+    year: 2021
   },
   {
     name: 'UK Net Zero Strategy',
-    description: 'Comprehensive plan to achieve net-zero emissions by 2050 across all sectors.',
+    description: 'Comprehensive plan to achieve net zero emissions by 2050, including sector-specific decarbonization strategies.',
     region: 'Europe',
     sector: 'Multiple',
     impactLevel: 'High',
-    taxIncentives: ['Carbon Trading', 'Clean Energy Support'],
-    status: 'Active'
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 2021
+  },
+
+  // Asian Policies
+  {
+    name: 'China Carbon Neutrality Pledge',
+    description: 'Commitment to achieve carbon neutrality by 2060, including significant investments in renewable energy and electric vehicles.',
+    region: 'Asia',
+    sector: 'Multiple',
+    impactLevel: 'High',
+    taxIncentive: 'Carbon Trading',
+    status: 'Active',
+    year: 2020
+  },
+  {
+    name: 'Japan Green Growth Strategy',
+    description: 'Strategy to achieve carbon neutrality by 2050, focusing on hydrogen economy and renewable energy.',
+    region: 'Asia',
+    sector: 'Clean Energy',
+    impactLevel: 'High',
+    taxIncentive: 'Renewable Energy Support',
+    status: 'Active',
+    year: 2020
   }
 ];
 
 export default function PoliciesPage() {
-  const [filteredPolicies, setFilteredPolicies] = useState(POLICIES);
+  const [filteredPolicies, setFilteredPolicies] = useState<Policy[]>(POLICIES);
 
   const handleFilterChange = (filters: any) => {
     let filtered = [...POLICIES];
-    
-    if (filters.sector) {
-      filtered = filtered.filter(policy => policy.sector === filters.sector);
-    }
-    
+
     if (filters.region) {
       filtered = filtered.filter(policy => policy.region === filters.region);
     }
-    
+    if (filters.sector) {
+      filtered = filtered.filter(policy => policy.sector === filters.sector);
+    }
     if (filters.impactLevel) {
       filtered = filtered.filter(policy => policy.impactLevel === filters.impactLevel);
     }
-    
     if (filters.taxIncentive) {
-      filtered = filtered.filter(policy => 
-        policy.taxIncentives.includes(filters.taxIncentive)
-      );
+      filtered = filtered.filter(policy => policy.taxIncentive === filters.taxIncentive);
+    }
+    if (filters.status) {
+      filtered = filtered.filter(policy => policy.status === filters.status);
     }
 
     setFilteredPolicies(filtered);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Climate Policy Intelligence
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Discover and analyze climate policies and incentives worldwide
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Climate Policies</h1>
+      <Disclaimer />
+      <PolicyFilter onFilterChange={handleFilterChange} />
 
-        <PolicyFilter onFilterChange={handleFilterChange} />
-
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPolicies.map((policy) => (
-            <div
-              key={policy.name}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-gray-900">
-                    {policy.name}
-                  </h3>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    policy.status === 'Active' ? 'bg-green-100 text-green-800' :
-                    policy.status === 'Proposed' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {policy.status}
-                  </span>
-                </div>
-                <p className="text-gray-600 mb-4">{policy.description}</p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Region:</span>
-                    {policy.region}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Sector:</span>
-                    {policy.sector}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Impact Level:</span>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      policy.impactLevel === 'High' ? 'bg-green-100 text-green-800' :
-                      policy.impactLevel === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-red-100 text-red-800'
-                    }`}>
-                      {policy.impactLevel}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {policy.taxIncentives.map((incentive) => (
-                      <span
-                        key={incentive}
-                        className="px-2 py-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full"
-                      >
-                        {incentive}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredPolicies.map((policy, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold text-gray-900">{policy.name}</h3>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                policy.status === 'Active' ? 'bg-green-100 text-green-800' :
+                policy.status === 'Proposed' ? 'bg-yellow-100 text-yellow-800' :
+                'bg-red-100 text-red-800'
+              }`}>
+                {policy.status}
+              </span>
+            </div>
+            <p className="text-gray-600 mb-4">{policy.description}</p>
+            <div className="space-y-2">
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Region:</span>
+                {policy.region}
+              </div>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Sector:</span>
+                {policy.sector}
+              </div>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Impact Level:</span>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  policy.impactLevel === 'High' ? 'bg-red-100 text-red-800' :
+                  policy.impactLevel === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-green-100 text-green-800'
+                }`}>
+                  {policy.impactLevel}
+                </span>
+              </div>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Tax Incentive:</span>
+                {policy.taxIncentive}
+              </div>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Year:</span>
+                {policy.year}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { YC_CLIMATE_COMPANIES, TECHSTARS_CLIMATE_COMPANIES } from '@/utils/scraper';
+import Disclaimer from '@/components/Disclaimer';
 
 interface Investment {
   company: string;
@@ -269,6 +270,28 @@ export default function InvestmentsPage() {
     return 'bg-red-100 text-red-800';
   };
 
+  const handleScoreFilter = (filter: 'all' | 'high' | 'moderate' | 'low') => {
+    setScoreFilter(filter);
+    let filtered = [...INVESTMENTS];
+    
+    if (filter !== 'all') {
+      filtered = filtered.filter(inv => {
+        switch (filter) {
+          case 'high':
+            return inv.score >= 81;
+          case 'moderate':
+            return inv.score >= 66 && inv.score <= 80;
+          case 'low':
+            return inv.score <= 65;
+          default:
+            return true;
+        }
+      });
+    }
+    
+    setFilteredInvestments(filtered);
+  };
+
   const handleFilterChange = (filters: any) => {
     let filtered = [...INVESTMENTS];
     
@@ -300,75 +323,101 @@ export default function InvestmentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Climate Tech Investments
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Track and analyze climate tech investment opportunities
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Climate Tech Investments</h1>
+      <Disclaimer />
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Climate Tech Investments
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Track and analyze climate tech investment opportunities
+            </p>
+          </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Investment Score Guide</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-green-50 rounded-lg cursor-pointer hover:bg-green-100 transition-colors"
-                 onClick={() => setScoreFilter('high')}>
-              <div className="text-green-800 font-medium">High Potential (81-100)</div>
-              <div className="text-sm text-green-600">Strong investment opportunity</div>
+          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">Investment Score Guide</h2>
+              {scoreFilter !== 'all' && (
+                <button
+                  onClick={() => handleScoreFilter('all')}
+                  className="text-sm text-gray-500 hover:text-gray-700"
+                >
+                  Clear Filter
+                </button>
+              )}
             </div>
-            <div className="p-4 bg-yellow-50 rounded-lg cursor-pointer hover:bg-yellow-100 transition-colors"
-                 onClick={() => setScoreFilter('moderate')}>
-              <div className="text-yellow-800 font-medium">Moderate Potential (66-80)</div>
-              <div className="text-sm text-yellow-600">Consider with due diligence</div>
-            </div>
-            <div className="p-4 bg-red-50 rounded-lg cursor-pointer hover:bg-red-100 transition-colors"
-                 onClick={() => setScoreFilter('low')}>
-              <div className="text-red-800 font-medium">High Risk (0-65)</div>
-              <div className="text-sm text-red-600">Exercise caution</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div 
+                className={`p-4 rounded-lg cursor-pointer transition-colors ${
+                  scoreFilter === 'high' ? 'bg-green-100' : 'bg-green-50 hover:bg-green-100'
+                }`}
+                onClick={() => handleScoreFilter('high')}
+              >
+                <div className="text-green-800 font-medium">High Potential (81-100)</div>
+                <div className="text-sm text-green-600">Strong investment opportunity</div>
+              </div>
+              <div 
+                className={`p-4 rounded-lg cursor-pointer transition-colors ${
+                  scoreFilter === 'moderate' ? 'bg-yellow-100' : 'bg-yellow-50 hover:bg-yellow-100'
+                }`}
+                onClick={() => handleScoreFilter('moderate')}
+              >
+                <div className="text-yellow-800 font-medium">Moderate Potential (66-80)</div>
+                <div className="text-sm text-yellow-600">Consider with due diligence</div>
+              </div>
+              <div 
+                className={`p-4 rounded-lg cursor-pointer transition-colors ${
+                  scoreFilter === 'low' ? 'bg-red-100' : 'bg-red-50 hover:bg-red-100'
+                }`}
+                onClick={() => handleScoreFilter('low')}
+              >
+                <div className="text-red-800 font-medium">High Risk (0-65)</div>
+                <div className="text-sm text-red-600">Exercise caution</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredInvestments.map((investment) => (
-            <div
-              key={investment.company}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {investment.company}
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Sector:</span>
-                    {investment.sector}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Stage:</span>
-                    {investment.fundingStage}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Amount:</span>
-                    {investment.amount}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-medium mr-2">Date:</span>
-                    {investment.date}
-                  </div>
-                  <div className="flex items-center justify-between mt-4">
-                    <span className="text-sm font-medium text-gray-500">Investment Score:</span>
-                    <span className={`px-3 py-1 text-sm font-medium rounded-full ${getScoreColor(investment.score)}`}>
-                      {investment.score}
-                    </span>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredInvestments.map((investment) => (
+              <div
+                key={investment.company}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {investment.company}
+                  </h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center text-sm text-gray-500">
+                      <span className="font-medium mr-2">Sector:</span>
+                      {investment.sector}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <span className="font-medium mr-2">Stage:</span>
+                      {investment.fundingStage}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <span className="font-medium mr-2">Amount:</span>
+                      {investment.amount}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <span className="font-medium mr-2">Date:</span>
+                      {investment.date}
+                    </div>
+                    <div className="flex items-center justify-between mt-4">
+                      <span className="text-sm font-medium text-gray-500">Investment Score:</span>
+                      <span className={`px-3 py-1 text-sm font-medium rounded-full ${getScoreColor(investment.score)}`}>
+                        {investment.score}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

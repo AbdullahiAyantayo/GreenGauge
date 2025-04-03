@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { YC_CLIMATE_COMPANIES, TECHSTARS_CLIMATE_COMPANIES } from '@/utils/scraper';
 import CompanyFilter from '@/components/CompanyFilter';
+import Disclaimer from '@/components/Disclaimer';
 
 interface Company {
   name: string;
@@ -143,11 +144,8 @@ export default function CompaniesPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Climate Tech Companies</h1>
-      <p className="text-lg text-gray-600 mb-8">
-        Explore climate tech companies from leading accelerators and their investment potential.
-      </p>
-
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Climate Tech Companies</h1>
+      <Disclaimer />
       <CompanyFilter onFilterChange={handleFilterChange} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
