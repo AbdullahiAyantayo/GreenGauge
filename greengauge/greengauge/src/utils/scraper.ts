@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 import { Company } from '../types';
 
 // Real YC Climate Tech Companies
-const YC_CLIMATE_COMPANIES: Company[] = [
+export const YC_CLIMATE_COMPANIES: Company[] = [
   {
     name: "Helion Energy",
     description: "Commercial fusion energy company developing a fusion generator",
@@ -568,7 +568,7 @@ const YC_CLIMATE_COMPANIES: Company[] = [
 }));
 
 // Known climate tech companies from Techstars
-const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
+export const TECHSTARS_CLIMATE_COMPANIES: Company[] = [
   {
     name: "CarbonCure",
     description: "CO2 utilization technology for concrete",
