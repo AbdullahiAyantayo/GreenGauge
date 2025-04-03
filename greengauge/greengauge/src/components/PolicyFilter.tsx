@@ -8,119 +8,122 @@ interface PolicyFilterProps {
 
 export default function PolicyFilter({ onFilterChange }: PolicyFilterProps) {
   const [filters, setFilters] = useState({
-    sector: '',
-    taxIncentive: '',
     region: '',
+    sector: '',
     impactLevel: '',
-    fundingStage: ''
+    taxIncentive: '',
+    status: ''
   });
 
-  const handleChange = (key: string, value: string) => {
-    const newFilters = { ...filters, [key]: value };
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const newFilters = { ...filters, [name]: value };
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm space-y-6">
-      <h3 className="text-lg font-semibold text-gray-900">Filter by Policy & Impact</h3>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Sector Filter */}
+    <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">Filter Policies</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Sector</label>
+          <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-1">
+            Region
+          </label>
           <select
-            value={filters.sector}
-            onChange={(e) => handleChange('sector', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-          >
-            <option value="">All Sectors</option>
-            <option value="clean-energy">Clean Energy</option>
-            <option value="carbon-capture">Carbon Capture</option>
-            <option value="transportation">Transportation</option>
-            <option value="materials">Materials</option>
-            <option value="agriculture">Agriculture</option>
-            <option value="waste">Waste Management</option>
-          </select>
-        </div>
-
-        {/* Tax Incentive Filter */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Tax Incentives</label>
-          <select
-            value={filters.taxIncentive}
-            onChange={(e) => handleChange('taxIncentive', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-          >
-            <option value="">All Incentives</option>
-            <option value="investment-tax-credit">Investment Tax Credit</option>
-            <option value="production-tax-credit">Production Tax Credit</option>
-            <option value="carbon-credits">Carbon Credits</option>
-            <option value="accelerated-depreciation">Accelerated Depreciation</option>
-          </select>
-        </div>
-
-        {/* Region Filter */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Region</label>
-          <select
+            id="region"
+            name="region"
             value={filters.region}
-            onChange={(e) => handleChange('region', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            onChange={handleChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
           >
             <option value="">All Regions</option>
-            <option value="north-america">North America</option>
-            <option value="europe">Europe</option>
-            <option value="asia-pacific">Asia Pacific</option>
-            <option value="latin-america">Latin America</option>
+            <option value="United States">United States</option>
+            <option value="Europe">Europe</option>
+            <option value="Asia">Asia</option>
+            <option value="Global">Global</option>
           </select>
         </div>
 
-        {/* Impact Level Filter */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Impact Level</label>
+          <label htmlFor="sector" className="block text-sm font-medium text-gray-700 mb-1">
+            Sector
+          </label>
           <select
+            id="sector"
+            name="sector"
+            value={filters.sector}
+            onChange={handleChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+          >
+            <option value="">All Sectors</option>
+            <option value="Clean Energy">Clean Energy</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Carbon Capture">Carbon Capture</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Building">Building</option>
+            <option value="Finance">Finance</option>
+            <option value="Multiple">Multiple Sectors</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="impactLevel" className="block text-sm font-medium text-gray-700 mb-1">
+            Impact Level
+          </label>
+          <select
+            id="impactLevel"
+            name="impactLevel"
             value={filters.impactLevel}
-            onChange={(e) => handleChange('impactLevel', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            onChange={handleChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
           >
             <option value="">All Impact Levels</option>
-            <option value="high">High Impact</option>
-            <option value="medium">Medium Impact</option>
-            <option value="low">Low Impact</option>
+            <option value="High">High Impact</option>
+            <option value="Medium">Medium Impact</option>
+            <option value="Low">Low Impact</option>
           </select>
         </div>
 
-        {/* Funding Stage Filter */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Funding Stage</label>
+          <label htmlFor="taxIncentive" className="block text-sm font-medium text-gray-700 mb-1">
+            Tax Incentive
+          </label>
           <select
-            value={filters.fundingStage}
-            onChange={(e) => handleChange('fundingStage', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            id="taxIncentive"
+            name="taxIncentive"
+            value={filters.taxIncentive}
+            onChange={handleChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
           >
-            <option value="">All Stages</option>
-            <option value="seed">Seed</option>
-            <option value="series-a">Series A</option>
-            <option value="series-b">Series B</option>
-            <option value="series-c">Series C</option>
-            <option value="series-d">Series D+</option>
+            <option value="">All Incentives</option>
+            <option value="Investment Tax Credit">Investment Tax Credit</option>
+            <option value="Production Tax Credit">Production Tax Credit</option>
+            <option value="EV Tax Credits">EV Tax Credits</option>
+            <option value="Carbon Border Tax">Carbon Border Tax</option>
+            <option value="Renewable Energy Support">Renewable Energy Support</option>
+            <option value="Building Renovation">Building Renovation</option>
+            <option value="Clean Transportation">Clean Transportation</option>
+            <option value="Carbon Trading">Carbon Trading</option>
           </select>
         </div>
-      </div>
 
-      {/* Policy Highlights */}
-      <div className="mt-6 pt-6 border-t">
-        <h4 className="text-sm font-medium text-gray-900 mb-3">Current Policy Highlights</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-teal-50 p-4 rounded-lg">
-            <h5 className="text-sm font-medium text-teal-800">Inflation Reduction Act</h5>
-            <p className="text-sm text-teal-700 mt-1">$369B in climate investments and tax credits</p>
-          </div>
-          <div className="bg-teal-50 p-4 rounded-lg">
-            <h5 className="text-sm font-medium text-teal-800">EU Green Deal</h5>
-            <p className="text-sm text-teal-700 mt-1">€1 trillion investment plan for climate neutrality</p>
-          </div>
+        <div>
+          <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+            Status
+          </label>
+          <select
+            id="status"
+            name="status"
+            value={filters.status}
+            onChange={handleChange}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
+          >
+            <option value="">All Statuses</option>
+            <option value="Active">Active</option>
+            <option value="Proposed">Proposed</option>
+            <option value="Expired">Expired</option>
+          </select>
         </div>
       </div>
     </div>
