@@ -2,81 +2,188 @@
 
 import { useState } from 'react';
 import { YC_CLIMATE_COMPANIES, TECHSTARS_CLIMATE_COMPANIES } from '@/utils/scraper';
-import CompanySearch from '@/components/CompanySearch';
-import PolicyFilter from '@/components/PolicyFilter';
+import CompanyFilter from '@/components/CompanyFilter';
+
+interface Company {
+  name: string;
+  description: string;
+  sector: string;
+  fundingStage: string;
+  accelerator: string;
+  region: string;
+  score: number;
+}
+
+interface SourceCompany {
+  name: string;
+  description: string;
+  sector: string;
+  funding?: {
+    stage: string;
+  };
+  location?: string;
+  teamSize?: string;
+  exitPotential?: {
+    high: boolean;
+  };
+}
+
+// Combine and process companies from both accelerators
+const COMPANIES: Company[] = [
+  ...(YC_CLIMATE_COMPANIES as SourceCompany[]).map(company => ({
+    name: company.name,
+    description: company.description,
+    sector: company.sector,
+    fundingStage: company.funding?.stage || 'Not Disclosed',
+    accelerator: 'YC',
+    region: company.location || 'Not Disclosed',
+    score: calculateScore(company)
+  })),
+  ...(TECHSTARS_CLIMATE_COMPANIES as SourceCompany[]).map(company => ({
+    name: company.name,
+    description: company.description,
+    sector: company.sector,
+    fundingStage: company.funding?.stage || 'Not Disclosed',
+    accelerator: 'Techstars',
+    region: company.location || 'Not Disclosed',
+    score: calculateScore(company)
+  }))
+];
+
+// Helper function to calculate company score based on various factors
+function calculateScore(company: SourceCompany): number {
+  let score = 70; // Base score
+
+  // Funding stage bonus
+  if (company.funding?.stage) {
+    switch (company.funding.stage.toLowerCase()) {
+      case 'seed':
+        score += 5;
+        break;
+      case 'series a':
+        score += 10;
+        break;
+      case 'series b':
+        score += 15;
+        break;
+      case 'series c':
+        score += 20;
+        break;
+      case 'series d':
+        score += 25;
+        break;
+      case 'series e':
+        score += 30;
+        break;
+    }
+  }
+
+  // Team size bonus
+  if (company.teamSize) {
+    const size = parseInt(company.teamSize);
+    if (size > 50) score += 10;
+    else if (size > 20) score += 5;
+  }
+
+  // Exit potential bonus
+  if (company.exitPotential?.high) score += 10;
+
+  // Cap score at 100
+  return Math.min(score, 100);
+}
 
 export default function CompaniesPage() {
-  const [filteredCompanies, setFilteredCompanies] = useState([...YC_CLIMATE_COMPANIES, ...TECHSTARS_CLIMATE_COMPANIES]);
-
-  const handleFilterChange = (filters: any) => {
-    let companies = [...YC_CLIMATE_COMPANIES, ...TECHSTARS_CLIMATE_COMPANIES];
-
-    if (filters.sector) {
-      companies = companies.filter(c => c.sector.toLowerCase().includes(filters.sector.toLowerCase()));
-    }
-    if (filters.fundingStage) {
-      companies = companies.filter(c => c.fundingStage.toLowerCase().includes(filters.fundingStage.toLowerCase()));
-    }
-    if (filters.region) {
-      companies = companies.filter(c => c.location.toLowerCase().includes(filters.region.toLowerCase()));
-    }
-
-    setFilteredCompanies(companies);
-  };
+  const [filteredCompanies, setFilteredCompanies] = useState<Company[]>(COMPANIES);
 
   const getScoreColor = (score: number) => {
-    if (score >= 81) return 'text-green-600';
-    if (score >= 66) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 81) return 'bg-green-100 text-green-800';
+    if (score >= 66) return 'bg-yellow-100 text-yellow-800';
+    return 'bg-red-100 text-red-800';
+  };
+
+  const handleFilterChange = (filters: any) => {
+    let filtered = [...COMPANIES];
+
+    if (filters.sector) {
+      filtered = filtered.filter(company => company.sector === filters.sector);
+    }
+    if (filters.fundingStage) {
+      filtered = filtered.filter(company => company.fundingStage === filters.fundingStage);
+    }
+    if (filters.accelerator) {
+      filtered = filtered.filter(company => company.accelerator === filters.accelerator);
+    }
+    if (filters.region) {
+      filtered = filtered.filter(company => {
+        if (filters.region === 'United States') {
+          return company.region.toLowerCase().includes('united states') || 
+                 company.region.toLowerCase().includes('us') ||
+                 company.region.toLowerCase().includes('usa');
+        }
+        return company.region.toLowerCase().includes(filters.region.toLowerCase());
+      });
+    }
+    if (filters.score) {
+      filtered = filtered.filter(company => {
+        switch (filters.score) {
+          case 'high':
+            return company.score >= 81 && company.score <= 100;
+          case 'moderate':
+            return company.score >= 66 && company.score <= 80;
+          case 'low':
+            return company.score >= 0 && company.score <= 65;
+          default:
+            return true;
+        }
+      });
+    }
+
+    setFilteredCompanies(filtered);
   };
 
   return (
-    <div className="space-y-8">
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-gray-900">Climate Tech Companies</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Discover and analyze promising climate tech companies from YC and Techstars
-        </p>
-      </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Climate Tech Companies</h1>
+      <p className="text-lg text-gray-600 mb-8">
+        Explore climate tech companies from leading accelerators and their investment potential.
+      </p>
 
-      <CompanySearch />
-
-      <PolicyFilter onFilterChange={handleFilterChange} />
+      <CompanyFilter onFilterChange={handleFilterChange} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCompanies.map((company) => (
-          <div key={company.name} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900">{company.name}</h3>
-                <p className="text-sm text-gray-500">{company.sector}</p>
-              </div>
-              <div className={`text-2xl font-bold ${getScoreColor(75)}`}>75</div>
+        {filteredCompanies.map((company, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold text-gray-900">{company.name}</h3>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                company.accelerator === 'YC' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'
+              }`}>
+                {company.accelerator}
+              </span>
             </div>
             <p className="text-gray-600 mb-4">{company.description}</p>
             <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Funding Stage</span>
-                <span className="font-medium">{company.fundingStage}</span>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Sector:</span>
+                {company.sector}
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Location</span>
-                <span className="font-medium">{company.location}</span>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Funding Stage:</span>
+                {company.fundingStage}
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Founded</span>
-                <span className="font-medium">{company.founded}</span>
+              <div className="flex items-center text-sm text-gray-500">
+                <span className="font-medium mr-2">Region:</span>
+                {company.region}
               </div>
-            </div>
-            <div className="mt-4 pt-4 border-t">
-              <a
-                href={company.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-teal-600 hover:text-teal-700 text-sm font-medium"
-              >
-                Visit Website →
-              </a>
+              <div className="flex items-center justify-between mt-4">
+                <span className="text-sm font-medium text-gray-500">Investment Score:</span>
+                <span className={`px-3 py-1 text-sm font-medium rounded-full ${getScoreColor(company.score)}`}>
+                  {company.score}
+                </span>
+              </div>
             </div>
           </div>
         ))}
